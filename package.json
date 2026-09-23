@@ -1,0 +1,30 @@
+{
+  "name": "2nd.me",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "dev": "bun --watch src/index.ts",
+    "check": "tsc --noEmit",
+    "lint": "biome lint src",
+    "format": "biome format --write src",
+    "test": "NODE_ENV=test bun test",
+    "knip": "knip",
+    "verify": "bun run check && bun run lint && bun test && bun run knip && bunx fallow"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "@types/bun": "latest",
+    "knip": "^6.38.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0",
+    "dotenv": "^18.0.3",
+    "grammy": "^1.46.0",
+    "zod": "^4.6.5"
+  }
+}
