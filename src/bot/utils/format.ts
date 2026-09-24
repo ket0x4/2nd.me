@@ -9,20 +9,6 @@ export function escapeHtml(text: string): string {
 }
 
 /**
- * Creates a Telegram expandable blockquote (Telegram 10.5+ / Bot API 7.0+).
- */
-export function createExpandableBlockquote(text: string): string {
-  return `<blockquote expandable>${escapeHtml(text.trim())}</blockquote>`;
-}
-
-/**
- * Creates a standard Telegram blockquote.
- */
-export function createBlockquote(text: string): string {
-  return `<blockquote>${escapeHtml(text.trim())}</blockquote>`;
-}
-
-/**
  * Generates an aesthetic text progress bar (e.g. [██████░░░░] 60%).
  */
 export function formatProgressBar(
@@ -44,7 +30,7 @@ export function formatProgressBar(
 /**
  * Converts LLM Markdown output into Telegram-safe HTML.
  */
-export function markdownToTelegramHtml(markdown: string): string {
+function markdownToTelegramHtml(markdown: string): string {
   if (!markdown) return '';
 
   // 1. Placeholder storage for code blocks to prevent nested markdown parsing
@@ -130,7 +116,7 @@ export function markdownToTelegramHtml(markdown: string): string {
  * Splits a long text into chunks smaller than Telegram's 4096 character limit,
  * taking care not to split in the middle of words or lines.
  */
-export function splitMessageChunks(text: string, maxLength = 4000): string[] {
+function splitMessageChunks(text: string, maxLength = 4000): string[] {
   if (text.length <= maxLength) {
     return [text];
   }

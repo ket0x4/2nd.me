@@ -4,7 +4,7 @@ import { memoryRepository } from '../db/repository';
 import type { MemoryRecord, ReminderRecord, ScoredMemory } from '../db/schema';
 import { escapeHtml, formatProgressBar } from './utils/format';
 
-export function formatReminderDate(timestamp: number): string {
+function formatReminderDate(timestamp: number): string {
   return new Date(timestamp).toLocaleString('tr-TR', {
     year: 'numeric',
     month: 'short',

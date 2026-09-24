@@ -70,21 +70,14 @@ export function extractRetryDelayMs(error: unknown): number | null {
   );
   if (directDelay !== null) return directDelay;
 
-  const msgDelay = parseMessageRetryDelay(
-    typeof err.message === 'string' ? err.message : '',
-  );
+  const msgDelay = parseMessageRetryDelay(typeof err.message === 'string' ? err.message : '');
   if (msgDelay !== null) return msgDelay;
 
-  const headers =
-    err.headers ?? (err.response as Record<string, unknown> | undefined)?.headers;
+  const headers = err.headers ?? (err.response as Record<string, unknown> | undefined)?.headers;
   return parseHeaderRetryDelay(headers);
 }
 
-function isRetryableError(
-  status: number,
-  message: string,
-  retryableCodes: number[],
-): boolean {
+function isRetryableError(status: number, message: string, retryableCodes: number[]): boolean {
   if (retryableCodes.includes(status)) return true;
   return /resource_exhausted|quota|too many requests|rate limit|high demand|unavailable|capacity/i.test(
     message,
@@ -108,10 +101,7 @@ function calculateWaitDelay(
   return targetWait;
 }
 
-export async function withRetry<T>(
-  fn: () => Promise<T>,
-  options: RetryOptions = {},
-): Promise<T> {
+export async function withRetry<T>(fn: () => Promise<T>, options: RetryOptions = {}): Promise<T> {
   const maxRetries = options.maxRetries ?? 4;
   const backoffMultiplier = options.backoffMultiplier ?? 2;
   const retryableCodes = options.retryableCodes ?? [429, 500, 502, 503, 504];

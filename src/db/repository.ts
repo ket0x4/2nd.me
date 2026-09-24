@@ -55,7 +55,7 @@ function sanitizeFtsQuery(query: string): string {
   return terms.map((term) => `"${term}"*`).join(' OR ');
 }
 
-export class MemoryRepository {
+class MemoryRepository {
   private db: Database;
 
   constructor(db?: Database) {

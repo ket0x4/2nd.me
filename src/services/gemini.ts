@@ -158,13 +158,7 @@ class GeminiService {
       }
 
       // Stage 3: Cascade fallback to FALLBACK_MODEL
-      return await this.transcribeWithModel(
-        fileUri,
-        resolvedMime,
-        env.FALLBACK_MODEL,
-        prompt,
-        2,
-      );
+      return await this.transcribeWithModel(fileUri, resolvedMime, env.FALLBACK_MODEL, prompt, 2);
     } finally {
       if (uploaded.name) {
         await this.ai.files.delete({ name: uploaded.name }).catch(() => {});

@@ -308,9 +308,7 @@ class AgentService {
       } catch (err: unknown) {
         const error = err as { status?: number; message?: string };
         if (error?.status === 503 || /high demand|unavailable/i.test(error?.message ?? '')) {
-          console.warn(
-            `${env.DEFAULT_MODEL} busy, falling back to ${env.FALLBACK_MODEL}`,
-          );
+          console.warn(`${env.DEFAULT_MODEL} busy, falling back to ${env.FALLBACK_MODEL}`);
           return await this.ai.models.generateContent({
             model: env.FALLBACK_MODEL,
             contents,

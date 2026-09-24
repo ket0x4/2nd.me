@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { z } from 'zod';
 
 const envSchema = z.object({
@@ -22,7 +21,7 @@ function loadEnv(): Env {
       TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || 'test_bot_token',
       ALLOWED_TELEGRAM_USER_ID: Number(process.env.ALLOWED_TELEGRAM_USER_ID || '123456789'),
       GEMINI_API_KEY: process.env.GEMINI_API_KEY || 'test_gemini_api_key',
-      DB_PATH: process.env.DB_PATH || ':memory:',
+      DB_PATH: process.env.TEST_DB_PATH || ':memory:',
       STORAGE_DIR: process.env.STORAGE_DIR || './storage_test',
       TIMEZONE: process.env.TIMEZONE || 'Europe/Istanbul',
       DEFAULT_MODEL: process.env.DEFAULT_MODEL || 'gemini-3.5-flash-lite',
